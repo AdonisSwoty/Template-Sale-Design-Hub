@@ -381,9 +381,24 @@
     html,body{ height:auto; overflow:visible; }
     body{ display:block; }
     .app{ flex-direction:column; height:auto; }
-    .sidebar{ width:100%; flex-basis:auto; height:auto; overflow-y:visible; }
-    .preview-area{ padding: 24px 16px 40px; height:auto; overflow-y:visible; }
-    .canvas-wrap{ height: auto; width:100%; }
+    .preview-area{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 38vh;
+      padding: 10px 12px;
+      z-index: 50;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .canvas-wrap{ height: 100%; width:auto; max-width:100%; margin:0 auto; }
+    .sidebar{
+      width:100%;
+      flex-basis:auto;
+      height:auto;
+      overflow-y:visible;
+      margin-top: 38vh;
+      padding-top: 20px;
+    }
   }
 </style>
 </head>
@@ -1972,13 +1987,6 @@ const ASSETS = {
     render();
   });
 
-  // in-app browsers (LINE, Facebook, Instagram, TikTok, WeChat) frequently ignore the
-  // <a download> attribute, so those get a "open in new tab, long-press to save" fallback.
-  function isInAppBrowser(){
-    const ua = navigator.userAgent || '';
-    return /FBAN|FBAV|Instagram|Line\/|MicroMessenger|TikTok|WeChat/i.test(ua);
-  }
-
   document.getElementById('downloadBtn').addEventListener('click', ()=>{
     render();
     let filename;
@@ -1988,27 +1996,10 @@ const ASSETS = {
       const filenames = { a3: 'promo-poster-A3.png', online: 'promo-poster-online-4x5.png', square: 'promo-poster-online-1x1.png' };
       filename = filenames[state.outputFormat] || 'promo-poster.png';
     }
-    // Use a Blob + object URL instead of a multi-megabyte data: URL: some mobile
-    // browsers/webviews silently fail to download (or even set) very long data: hrefs.
-    canvas.toBlob((blob)=>{
-      if(!blob){ alert('สร้างไฟล์ภาพไม่สำเร็จ ลองใหม่อีกครั้ง'); return; }
-      const url = URL.createObjectURL(blob);
-      if(isInAppBrowser()){
-        window.open(url, '_blank');
-        alert('ถ้าไฟล์ไม่ดาวน์โหลดอัตโนมัติ ให้กดค้างที่รูปที่เปิดขึ้นมาแล้วเลือก "บันทึกรูปภาพ" หรือเปิดลิงก์นี้ด้วย Safari/Chrome แทนเบราว์เซอร์ในแอป');
-        setTimeout(()=>URL.revokeObjectURL(url), 15000);
-        return;
-      }
-      try{
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = url;
-        document.body.appendChild(link); link.click(); link.remove();
-      }catch(e){
-        window.open(url, '_blank');
-      }
-      setTimeout(()=>URL.revokeObjectURL(url), 5000);
-    }, 'image/png');
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
   });
 
   document.getElementById('resetBtn').addEventListener('click', ()=>{
