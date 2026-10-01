@@ -102,6 +102,19 @@
   }
   textarea.txt{resize:none; line-height:1.5; display:block;}
   .field-note{font-size:.72rem; opacity:.65; margin-top:6px;}
+  /* mobile: live preview pinned to the top while the controls scroll underneath */
+  @media (max-width:760px){
+    .stage{
+      order:-1; flex-basis:100%; position:sticky; top:0; z-index:20;
+      padding:10px 12px 8px; padding-top:calc(10px + env(safe-area-inset-top,0px));
+      box-shadow:0 6px 16px rgba(0,0,0,.28);
+    }
+    .stage-inner{max-width:none;}
+    .canvas-shell, .canvas-shell.a-ratio{height:38vh; height:38svh; width:auto; max-width:100%; aspect-ratio:4/5; border-radius:10px;}
+    .canvas-shell.a-ratio{aspect-ratio:1/1.4142;}
+    .canvas-shell canvas{width:100%; height:100%; display:block;}
+    .hint{font-size:.68rem; margin-top:5px;}
+  }
 </style>
 </head>
 <body>
