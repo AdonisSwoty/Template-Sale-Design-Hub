@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เลือก Template สร้างโปสเตอร์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#a4123f; --wine-dark:#7d0e30; --cream:#f6efe3; --ink:#241a15;
+    --gold:#c9973b; --panel:#2a1c15; --panel-2:#332319;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;margin:0;}
+  body{
+    font-family:'Kanit',sans-serif;
+    background:radial-gradient(circle at 20% 0%, #3a2418 0%, var(--ink) 55%);
+    color:var(--cream);
+    min-height:100%;
+    padding:48px 20px calc(48px + env(safe-area-inset-bottom,0px));
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:36px;
+  }
+  header{ text-align:center; max-width:560px; }
+  h1{
+    margin:0 0 10px;
+    font-size:clamp(24px,4vw,34px);
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+  header p{
+    margin:0;
+    color:#d8c6b4;
+    font-size:15px;
+    line-height:1.6;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+    width:100%;
+    max-width:920px;
+  }
+  a.card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    height:230px;
+    padding:22px;
+    border-radius:18px;
+    text-decoration:none;
+    color:var(--cream);
+    background:linear-gradient(160deg, var(--panel-2), var(--panel));
+    border:1px solid rgba(201,151,59,.25);
+    overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  a.card::before{
+    content:"";
+    position:absolute; inset:0;
+    background:var(--accent);
+    opacity:.16;
+    transition:opacity .18s ease;
+  }
+  a.card:hover{
+    transform:translateY(-4px);
+    border-color:var(--gold);
+    box-shadow:0 14px 30px rgba(0,0,0,.35);
+  }
+  a.card:hover::before{ opacity:.28; }
+  .tag{
+    align-self:flex-start;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.15);
+    margin-bottom:auto;
+    position:relative;
+    z-index:1;
+  }
+  .card h2{
+    position:relative; z-index:1;
+    margin:0 0 6px;
+    font-size:20px;
+    font-weight:600;
+  }
+  .card p{
+    position:relative; z-index:1;
+    margin:0;
+    font-size:13px;
+    color:#e6d9c8;
+    line-height:1.5;
+  }
+  .arrow{
+    position:relative; z-index:1;
+    margin-top:14px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  footer{
+    font-size:12px;
+    color:#a1876f;
+    text-align:center;
+    max-width:520px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>เลือก Template ที่ต้องการใช้งาน</h1>
+  <p>รวม 3 เครื่องมือสร้างโปสเตอร์ไว้ที่เดียว แตะการ์ดเพื่อเปิดใช้งาน Template ที่ต้องการได้เลย</p>
+</header>
+
+<div class="grid">
+  <a class="card" style="--accent:#a4123f" href="foam-art-poster-generator.html">
+    <span class="tag">Poster</span>
+    <h2>Foam Art Poster</h2>
+    <p>เครื่องมือสร้างโปสเตอร์คาเฟ่ / ลาเต้อาร์ต โทนไวน์-ทอง</p>
+    <span class="arrow">เปิดใช้งาน →</span>
+  </a>
+
+  <a class="card" style="--accent:#1d6f3a" href="matchday-poster-studio.html">
+    <span class="tag">Poster</span>
+    <h2>Match Day Poster Studio</h2>
+    <p>เครื่องมือสร้างโปสเตอร์ประกาศแข่งขันฟุตบอล / กีฬา</p>
+    <span class="arrow">เปิดใช้งาน →</span>
+  </a>
+
+  <a class="card" style="--accent:#d3a441" href="food-drink-poster-generator-2.html">
+    <span class="tag">Poster</span>
+    <h2>โปสเตอร์โปรโมชั่นอาหาร</h2>
+    <p>เครื่องมือสร้างภาพโปรโมชั่นอาหารและเครื่องดื่ม</p>
+    <span class="arrow">เปิดใช้งาน →</span>
+  </a>
+</div>
+
+<footer>เก็บไฟล์นี้ไว้ในโฟลเดอร์เดียวกับไฟล์ Template ทั้ง 3 ไฟล์ แล้วเปิด index.html เพื่อเริ่มใช้งาน</footer>
+
+</body>
+</html>
