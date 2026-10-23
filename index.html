@@ -41,10 +41,25 @@
   }
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(2,1fr);
     gap:22px;
     width:100%;
-    max-width:920px;
+  }
+  @media(max-width:600px){ .grid{ grid-template-columns:1fr; } }
+  .group{ width:100%; max-width:860px; }
+  .group-title{
+    display:flex; align-items:center; gap:14px;
+    margin:0 0 16px;
+    font-size:14px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold);
+  }
+  .group-title::after{
+    content:""; flex:1; height:1px;
+    background:linear-gradient(90deg, rgba(201,151,59,.5), rgba(201,151,59,0));
+  }
+  .group-title small{
+    font-size:12px; font-weight:400; letter-spacing:.02em; text-transform:none; color:#b79f86;
   }
   a.card{
     position:relative;
@@ -100,6 +115,7 @@
     font-size:13px;
     color:#e6d9c8;
     line-height:1.5;
+    min-height:39px;
   }
   .arrow{
     position:relative; z-index:1;
@@ -123,10 +139,12 @@
 
 <header>
   <h1>เลือก Template ที่ต้องการใช้งาน</h1>
-  <p>รวม 3 เครื่องมือสร้างโปสเตอร์ไว้ที่เดียว แตะการ์ดเพื่อเปิดใช้งาน Template ที่ต้องการได้เลย</p>
+  <p>รวม 4 เครื่องมือสร้างโปสเตอร์ไว้ที่เดียว แตะการ์ดเพื่อเปิดใช้งาน Template ที่ต้องการได้เลย</p>
 </header>
 
-<div class="grid">
+<section class="group">
+  <h3 class="group-title">Foam Art <small>ชุดโปสเตอร์ German Tawandang</small></h3>
+  <div class="grid">
   <a class="card" style="--accent:#a4123f" href="foam-art-poster-generator.html">
     <span class="tag">Poster</span>
     <h2>Foam Art Poster</h2>
@@ -134,6 +152,18 @@
     <span class="arrow">เปิดใช้งาน →</span>
   </a>
 
+  <a class="card" style="--accent:#d9622b" href="QR-Code-Foam-Art-Poster.html">
+    <span class="tag">Poster · QR Code</span>
+    <h2>QR Code Foam Art Poster</h2>
+    <p>ใส่เลขเครื่อง แล้ว QR Code เปลี่ยนให้อัตโนมัติ ดาวน์โหลด PDF A4 / A3 (2 หน้า)</p>
+    <span class="arrow">เปิดใช้งาน →</span>
+  </a>
+  </div>
+</section>
+
+<section class="group">
+  <h3 class="group-title">Template อื่นๆ <small>กีฬา / อาหารและเครื่องดื่ม</small></h3>
+  <div class="grid">
   <a class="card" style="--accent:#1d6f3a" href="matchday-poster-studio.html">
     <span class="tag">Poster</span>
     <h2>Match Day Poster Studio</h2>
@@ -147,9 +177,10 @@
     <p>เครื่องมือสร้างภาพโปรโมชั่นอาหารและเครื่องดื่ม</p>
     <span class="arrow">เปิดใช้งาน →</span>
   </a>
-</div>
+  </div>
+</section>
 
-<footer>เก็บไฟล์นี้ไว้ในโฟลเดอร์เดียวกับไฟล์ Template ทั้ง 3 ไฟล์ แล้วเปิด index.html เพื่อเริ่มใช้งาน</footer>
+<footer>เก็บไฟล์นี้ไว้ในโฟลเดอร์เดียวกับไฟล์ Template ทั้ง 4 ไฟล์ แล้วเปิด index.html เพื่อเริ่มใช้งาน</footer>
 
 </body>
 </html>
