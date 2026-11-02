@@ -127,6 +127,30 @@
     align-items:center;
     gap:6px;
   }
+  /* let the page background grow with the content (the page is now taller than one screen) */
+  html{ background:var(--ink); }
+  body{ height:auto; }
+
+  /* video download card (external link) */
+  a.card.video{
+    grid-column:1 / -1;
+    height:auto; min-height:190px;
+    flex-direction:row; align-items:center; gap:22px;
+  }
+  a.card.video .play{
+    position:relative; z-index:1;
+    flex:0 0 auto; width:72px; height:72px; border-radius:50%;
+    display:grid; place-items:center;
+    background:rgba(201,151,59,.16); border:1px solid rgba(201,151,59,.5);
+  }
+  a.card.video .play svg{ width:26px; height:26px; margin-left:4px; fill:var(--gold); }
+  a.card.video .body{ position:relative; z-index:1; flex:1; display:flex; flex-direction:column; }
+  a.card.video .tag{ margin-bottom:14px; }
+  a.card.video .arrow svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2.4; }
+  @media(max-width:600px){
+    a.card.video{ flex-direction:column; align-items:flex-start; }
+    a.card.video .play{ width:58px; height:58px; }
+  }
   footer{
     font-size:12px;
     color:#a1876f;
@@ -148,7 +172,7 @@
   <a class="card" style="--accent:#a4123f" href="foam-art-poster-generator.html">
     <span class="tag">Poster</span>
     <h2>Foam Art Poster</h2>
-    <p>เครื่องมือสร้างโปสเตอร์คาเฟ่ / ลาเต้อาร์ต โทนไวน์-ทอง</p>
+    <p>เครื่องมือสร้าง Foam Art Poster</p>
     <span class="arrow">เปิดใช้งาน →</span>
   </a>
 
@@ -157,6 +181,22 @@
     <h2>QR Code Foam Art Poster</h2>
     <p>ใส่เลขเครื่อง (Serial Number หรือ SN) แล้ว QR Code เปลี่ยนให้อัตโนมัติ ดาวน์โหลด PDF A4 / A3 (2 หน้า)</p>
     <span class="arrow">เปิดใช้งาน →</span>
+  </a>
+  </div>
+</section>
+
+<section class="group">
+  <h3 class="group-title">Video <small>วิดีโอสำหรับโพสต์และจอในร้าน</small></h3>
+  <div class="grid">
+  <!-- ลิงก์โฟลเดอร์วิดีโอบน SharePoint: เปลี่ยนลิงก์ได้ที่ href ด้านล่าง -->
+  <a class="card video" style="--accent:#6b3fa0" href="https://carabao-my.sharepoint.com/:f:/g/personal/yanaphat_l_carabao_co_th/IgB1p4Vdy1MzTasvNtOVvoyvAZ-KDzvUZMofM4zWlZ1DjCA?e=NtTtKU" target="_blank" rel="noopener noreferrer">
+    <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span>
+    <span class="body">
+      <span class="tag">Video · ลิงก์ภายนอก</span>
+      <h2>ดาวน์โหลดวิดีโอ Foam Art</h2>
+      <p>รวมไฟล์วิดีโอโปรโมท Foam Art กดเพื่อไปที่โฟลเดอร์ SharePoint แล้วเลือกไฟล์ที่ต้องการบันทึกลงเครื่องได้เอง</p>
+      <span class="arrow">ไปหน้าดาวน์โหลด <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+    </span>
   </a>
   </div>
 </section>
