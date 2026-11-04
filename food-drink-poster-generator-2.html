@@ -245,6 +245,47 @@
   .format-btn.active .format-title{ color:#fff; }
   .format-btn.active .format-sub{ color: rgba(241,230,214,0.75); }
 
+  /* step 1: template cards */
+  .template-group{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .template-group .template-card{
+    position:relative; padding:0; gap:0; overflow:hidden;
+    border:2px solid rgba(255,255,255,0.10); border-radius:14px;
+    align-items:stretch; background:rgba(0,0,0,0.25);
+  }
+  .template-group .template-card .template-svg{ display:block; width:100%; height:auto; }
+  .template-group .template-card .template-label{
+    display:block; padding:8px 6px 9px; text-align:center;
+    font-family:'Kanit',sans-serif; font-size:12.5px; font-weight:500; line-height:1.3;
+    color:rgba(241,230,214,0.8);
+  }
+  .template-group .template-card.active{ border-color:var(--gold); background:rgba(211,164,65,0.10); }
+  .template-group .template-card.active .template-label{ color:#fff; }
+  .template-group .template-card.active::after{
+    content:'\2713'; position:absolute; top:8px; right:8px;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--gold); color:#2b1a12; font-weight:800; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  /* step 2: size segmented control */
+  .seg-group{
+    display:flex; gap:4px; padding:5px;
+    background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06); border-radius:14px;
+  }
+  .seg-group .seg-btn{
+    flex:1 1 0; min-width:0; min-height:58px; padding:10px 4px; gap:2px;
+    flex-direction:column; justify-content:center; align-items:center; text-align:center;
+    border:none; background:transparent; border-radius:10px;
+  }
+  .seg-group .seg-btn span{
+    font-family:'Kanit',sans-serif; font-size:12.5px; font-weight:600; line-height:1.25;
+    color:rgba(241,230,214,0.78);
+  }
+  .seg-group .seg-btn.active{ background:var(--gold); }
+  .seg-group .seg-btn.active span{ color:#2b1a12; }
+  .size-desc{ margin-top:12px; font-size:12px; line-height:1.55; color:rgba(241,230,214,0.5); }
+
   .checkbox-row{
     display:flex; align-items:center; gap:9px;
     font-size:12.5px; color: rgba(241,230,214,0.75);
@@ -413,14 +454,75 @@
     </div>
 
     <div class="step">
-      <div class="toggle-group" id="modeGroup" style="grid-template-columns: 1fr 1fr;">
-        <div class="toggle-btn mode-btn active" data-mode="single">
-          <span class="format-title">โปสเตอร์เมนูเดียว</span>
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">เลือกแบบภาพ</div>
+      </div>
+      <div class="step-hint">เลือกเทมเพลตที่ต้องการใช้ได้ 2 แบบ</div>
+      <div class="template-group" id="modeGroup">
+        <div class="toggle-btn mode-btn template-card active" data-mode="single">
+          <svg class="template-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="200" height="250" fill="#a41634"/>
+            <rect x="48" y="16" width="104" height="38" rx="9" fill="#f5c23a"/>
+            <rect x="62" y="26" width="76" height="8" rx="4" fill="#a41634"/>
+            <rect x="72" y="40" width="56" height="5" rx="2.5" fill="#fff" opacity=".85"/>
+            <rect x="0" y="68" width="200" height="112" fill="#7a4a26"/>
+            <ellipse cx="78" cy="128" rx="52" ry="40" fill="#f1e6d6"/>
+            <ellipse cx="78" cy="128" rx="38" ry="28" fill="#d98a3a"/>
+            <rect x="128" y="86" width="34" height="76" rx="5" fill="#e8a23a"/>
+            <rect x="128" y="86" width="34" height="18" rx="5" fill="#fff" opacity=".9"/>
+            <path d="M162 100 q16 0 16 18 q0 18 -16 18" fill="none" stroke="#f1e6d6" stroke-width="5"/>
+            <circle cx="36" cy="160" r="17" fill="#8f1c3a" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+            <rect x="58" y="193" width="84" height="12" rx="6" fill="#fff"/>
+            <rect x="50" y="214" width="100" height="6" rx="3" fill="#fff" opacity=".7"/>
+            <rect x="64" y="226" width="72" height="6" rx="3" fill="#fff" opacity=".7"/>
+          </svg>
+          <span class="template-label">โปสเตอร์เมนูเดียว</span>
         </div>
-        <div class="toggle-btn mode-btn" data-mode="multi">
-          <span class="format-title">เมนูแนะนำ (2-3 เมนู)</span>
+        <div class="toggle-btn mode-btn template-card" data-mode="multi">
+          <svg class="template-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="tplMultiBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1b12"/><stop offset=".36" stop-color="#4a2c18"/><stop offset=".38" stop-color="#6f3d1d"/><stop offset="1" stop-color="#5a2f14"/></linearGradient></defs>
+            <rect width="200" height="250" fill="url(#tplMultiBg)"/>
+            <circle cx="30" cy="22" r="9" fill="#f5c23a" opacity=".35"/>
+            <circle cx="170" cy="30" r="12" fill="#f5c23a" opacity=".25"/>
+            <rect x="50" y="12" width="100" height="30" rx="8" fill="#f5c23a"/>
+            <rect x="64" y="20" width="72" height="7" rx="3.5" fill="#a41634"/>
+            <rect x="76" y="48" width="48" height="5" rx="2.5" fill="#fff"/>
+            <rect x="12" y="76" width="56" height="9" rx="4.5" fill="#ffd23f"/>
+            <rect x="16" y="90" width="48" height="5" rx="2.5" fill="#fff" opacity=".8"/>
+            <circle cx="132" cy="88" r="22" fill="#e9d2a8" stroke="#fff" stroke-width="2.5"/>
+            <circle cx="132" cy="88" r="14" fill="#c9692a"/>
+            <circle cx="110" cy="104" r="8" fill="#8f1c3a"/>
+            <circle cx="68" cy="142" r="22" fill="#e9d2a8" stroke="#fff" stroke-width="2.5"/>
+            <circle cx="68" cy="142" r="14" fill="#c9692a"/>
+            <circle cx="90" cy="158" r="8" fill="#8f1c3a"/>
+            <rect x="120" y="130" width="56" height="9" rx="4.5" fill="#ffd23f"/>
+            <rect x="124" y="144" width="48" height="5" rx="2.5" fill="#fff" opacity=".8"/>
+            <rect x="12" y="184" width="56" height="9" rx="4.5" fill="#ffd23f"/>
+            <rect x="16" y="198" width="48" height="5" rx="2.5" fill="#fff" opacity=".8"/>
+            <circle cx="132" cy="196" r="22" fill="#e9d2a8" stroke="#fff" stroke-width="2.5"/>
+            <circle cx="132" cy="196" r="14" fill="#c9692a"/>
+            <circle cx="110" cy="212" r="8" fill="#8f1c3a"/>
+            <rect x="0" y="226" width="200" height="24" fill="#a41634"/>
+            <rect x="48" y="234" width="104" height="8" rx="4" fill="#fff"/>
+          </svg>
+          <span class="template-label">เมนูแนะนำ (2-3 เมนู)</span>
         </div>
       </div>
+    </div>
+
+    <div class="step" id="sizeStep">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">ขนาดชิ้นงาน</div>
+      </div>
+      <div class="step-hint">พรีวิวจะเปลี่ยนตามขนาดที่เลือก</div>
+      <div class="seg-group" id="formatGroup">
+        <div class="toggle-btn seg-btn" data-format="online"><span>ออนไลน์</span><span>4:5 (PNG)</span></div>
+        <div class="toggle-btn seg-btn" data-format="square"><span>ออนไลน์</span><span>1:1 (PNG)</span></div>
+        <div class="toggle-btn seg-btn active" data-format="a3"><span>ออฟไลน์</span><span>A3 (PNG)</span></div>
+      </div>
+      <div class="size-desc" id="sizeDesc"></div>
     </div>
 
     <div class="step">
@@ -461,7 +563,7 @@
     <div id="singleModeUI">
     <div class="step">
       <div class="step-head">
-        <div class="step-num">1</div>
+        <div class="step-num">3</div>
         <div class="step-title">รูปอาหาร</div>
       </div>
       <div class="step-hint">ภาพจะถูกครอบให้พอดีกับกรอบตรงกลางโดยอัตโนมัติ</div>
@@ -492,7 +594,7 @@
 
     <div class="step">
       <div class="step-head">
-        <div class="step-num">2</div>
+        <div class="step-num">4</div>
         <div class="step-title">ข้อความโปรโมชั่น</div>
       </div>
       <div class="step-hint">พิมพ์แก้ไขข้อความหัวเรื่องได้เอง (เช่น โรเซ่ x ส้มตำ)</div>
@@ -522,7 +624,7 @@
 
     <div class="step" id="priceStep">
       <div class="step-head">
-        <div class="step-num">3</div>
+        <div class="step-num">5</div>
         <div class="step-title">ราคา</div>
       </div>
       <div id="priceSection">
@@ -550,7 +652,7 @@
 
     <div class="step">
       <div class="step-head">
-        <div class="step-num">4</div>
+        <div class="step-num">6</div>
         <div class="step-title">เลือกสินค้าคู่ขาย</div>
       </div>
       <div class="toggle-group cols-3">
@@ -612,33 +714,12 @@
       </div>
     </div>
 
-    <div class="step">
-      <div class="step-head">
-        <div class="step-num">6</div>
-        <div class="step-title">ขนาดไฟล์ดาวน์โหลด</div>
-      </div>
-      <div class="toggle-group cols-3" id="formatGroup">
-        <div class="toggle-btn format-btn" data-format="online">
-          <span class="format-title">ออนไลน์ 4:5</span>
-          <span class="format-sub">1080×1350px</span>
-        </div>
-        <div class="toggle-btn format-btn" data-format="square">
-          <span class="format-title">ออนไลน์ 1:1</span>
-          <span class="format-sub">800×800px</span>
-        </div>
-        <div class="toggle-btn format-btn active" data-format="a3">
-          <span class="format-title">ออฟไลน์ (พิมพ์)</span>
-          <span class="format-sub">Poster A3</span>
-        </div>
-      </div>
-      <div class="step-hint" style="margin-top:10px;">เลือก 1:1 ระบบจะตัดราคาและข้อความรายละเอียดออกอัตโนมัติ เหลือแค่โลโก้ สินค้า และหัวข้อ ตามภาพตัวอย่าง</div>
-    </div>
     </div><!-- /singleModeUI -->
 
     <div id="multiModeUI" style="display:none;">
       <div class="step">
         <div class="step-head">
-          <div class="step-num">1</div>
+          <div class="step-num">3</div>
           <div class="step-title">จำนวนเมนู</div>
         </div>
         <div class="toggle-group" id="rowCountGroup" style="grid-template-columns: 1fr 1fr;">
@@ -653,17 +734,13 @@
 
       <div class="step">
         <div class="step-head">
-          <div class="step-num">2</div>
+          <div class="step-num">4</div>
           <div class="step-title">หัวข้อรอง (ใต้โลโก้)</div>
         </div>
         <div class="step-hint">ข้อความใต้โลโก้ เช่น "โปรโมชั่นพิเศษ" หรือสรุปชื่อเมนู</div>
         <input type="text" id="multiSubtitleText" value="โปรโมชั่นพิเศษ" maxlength="60"
           style="width:100%; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.14); color:#fff; font-family:'Kanit',sans-serif; font-weight:500; font-size:14px; padding:10px 12px; border-radius:9px; outline:none;">
         <div class="adjust-group">
-          <div class="field-row">
-            <div class="field-label"><span>ขนาดโลโก้คู่แซ่บ</span><span class="field-val" id="multiTitleScaleVal">100%</span></div>
-            <input type="range" id="multiTitleScale" min="50" max="150" value="100" step="1">
-          </div>
           <div class="field-row">
             <div class="field-label"><span>ขนาดข้อความหัวข้อรอง</span><span class="field-val" id="multiSubtitleScaleVal">100%</span></div>
             <input type="range" id="multiSubtitleScale" min="50" max="170" value="100" step="1">
@@ -675,28 +752,11 @@
 
       <div class="step">
         <div class="step-head">
-          <div class="step-num">6</div>
+          <div class="step-num">8</div>
           <div class="step-title">ข้อความปิดท้าย</div>
         </div>
         <input type="text" id="multiBottomText" value="ให้คนไทยแซ่บได้มากกว่าเดิม" maxlength="60"
           style="width:100%; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.14); color:#fff; font-family:'Kanit',sans-serif; font-weight:600; font-size:15px; padding:10px 12px; border-radius:9px; outline:none;">
-      </div>
-
-      <div class="step">
-        <div class="step-head">
-          <div class="step-num">7</div>
-          <div class="step-title">ขนาดไฟล์ดาวน์โหลด</div>
-        </div>
-        <div class="toggle-group" id="multiFormatGroup">
-          <div class="toggle-btn format-btn active" data-multiformat="a3">
-            <span class="format-title">ออฟไลน์ (พิมพ์)</span>
-            <span class="format-sub">Poster A3</span>
-          </div>
-          <div class="toggle-btn format-btn" data-multiformat="online">
-            <span class="format-title">ออนไลน์ 4:5</span>
-            <span class="format-sub">1080×1350px</span>
-          </div>
-        </div>
       </div>
     </div><!-- /multiModeUI -->
 
@@ -859,7 +919,6 @@ const ASSETS = {
     multi: {
       subtitleText: 'โปรโมชั่นพิเศษ',
       subtitleScale: 1,
-      titleScale: 1,
       bottomText: 'ให้คนไทยแซ่บได้มากกว่าเดิม',
       outputFormat: 'a3',
       rowCount: 3,
@@ -1328,14 +1387,18 @@ const ASSETS = {
     if(state.showStoreLogo){ drawStoreLogoSlot(layout.STORELOGO); }
   }
 
+  // The "คู่แซ่บแห่งชาติ" logo in the multi-menu template is locked at 150%
+  // (not user-adjustable), for both online and offline sizes.
+  const MULTI_TITLE_SCALE = 1.5;
+
   function computeLayoutMulti(format){
     const W = 1755;
-    const titleScale = state.multi.titleScale || 1;
+    const titleScale = MULTI_TITLE_SCALE;
     // TITLE box is height-constrained, so its rendered height grows almost
     // exactly with titleScale, expanding downward from its own center - used
-    // below to push the subtitle text down so it never collides with a bigger
-    // logo. HEADER_H itself stays fixed (large enough for max slider values)
-    // so the canvas size and background photo never shift as these sliders move.
+    // below to push the subtitle text down so it never collides with the logo.
+    // HEADER_H stays fixed so the canvas size and background photo never shift
+    // when the subtitle size slider moves.
     const titleGrowDown = Math.max(0, titleScale - 1) * (345/2);
     const HEADER_H = 800;
     const ROWS = state.multi.rowCount || 3;
@@ -1413,7 +1476,7 @@ const ASSETS = {
     ctx.fillStyle = '#A41634';
     ctx.fillRect(0, L.bottomTopY, L.canvasW, L.canvasH - L.bottomTopY);
 
-    if(imgTitle) drawContain(imgTitle, L.TITLE, 'center', state.multi.titleScale || 1);
+    if(imgTitle) drawContain(imgTitle, L.TITLE, 'center', MULTI_TITLE_SCALE);
 
     ctx.save();
     ctx.shadowColor = 'rgba(0,0,0,0.6)';
@@ -1580,7 +1643,7 @@ const ASSETS = {
     return `
       <div class="row-card" id="rowCard${i}">
         <div class="step-head">
-          <div class="step-num">${2+n}</div>
+          <div class="step-num">${4+n}</div>
           <div class="step-title">เมนูที่ ${n}</div>
         </div>
         <div class="step-hint">รูปอาหาร</div>
@@ -1841,13 +1904,6 @@ const ASSETS = {
   // ---- Multi-mode top-level controls ----
   const multiSubtitleInput = document.getElementById('multiSubtitleText');
   multiSubtitleInput.addEventListener('input', ()=>{ state.multi.subtitleText = multiSubtitleInput.value; render(); });
-  const multiTitleScale = document.getElementById('multiTitleScale');
-  const multiTitleScaleVal = document.getElementById('multiTitleScaleVal');
-  multiTitleScale.addEventListener('input', ()=>{
-    state.multi.titleScale = multiTitleScale.value/100;
-    multiTitleScaleVal.textContent = multiTitleScale.value + '%';
-    render();
-  });
   const multiSubtitleScale = document.getElementById('multiSubtitleScale');
   const multiSubtitleScaleVal = document.getElementById('multiSubtitleScaleVal');
   multiSubtitleScale.addEventListener('input', ()=>{
@@ -1857,15 +1913,6 @@ const ASSETS = {
   });
   const multiBottomInput = document.getElementById('multiBottomText');
   multiBottomInput.addEventListener('input', ()=>{ state.multi.bottomText = multiBottomInput.value; render(); });
-
-  document.querySelectorAll('.toggle-btn[data-multiformat]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.toggle-btn[data-multiformat]').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      state.multi.outputFormat = btn.dataset.multiformat;
-      render();
-    });
-  });
 
   function syncRowCountUI(){
     for(let idx=0; idx<3; idx++){
@@ -1895,6 +1942,8 @@ const ASSETS = {
       state.mode = btn.dataset.mode;
       singleModeUI.style.display = state.mode === 'single' ? 'block' : 'none';
       multiModeUI.style.display = state.mode === 'multi' ? 'block' : 'none';
+      syncSizeUI();
+      syncFormatDependentControls();
       render();
     });
   });
@@ -1946,15 +1995,37 @@ const ASSETS = {
     priceHiddenNote.style.display = isSquare ? 'block' : 'none';
   }
 
+  // one shared size selector (step 2) - applies to whichever template is active
+  const sizeDescEl = document.getElementById('sizeDesc');
+  function syncSizeUI(){
+    const isMulti = state.mode === 'multi';
+    const current = isMulti ? state.multi.outputFormat : state.outputFormat;
+    document.querySelectorAll('.toggle-btn[data-format]').forEach(b=>{
+      b.classList.toggle('active', b.dataset.format === current);
+      if(b.dataset.format === 'square') b.style.display = isMulti ? 'none' : '';
+    });
+    if(sizeDescEl){
+      sizeDescEl.innerHTML = isMulti
+        ? 'ออนไลน์ 4:5 (1080×1350px) • ออฟไลน์ A3 (1755×2662px สำหรับพิมพ์)'
+        : 'ออนไลน์ 4:5 (1080×1350px) • ออนไลน์ 1:1 (800×800px) • ออฟไลน์ A3 (1755×2482px สำหรับพิมพ์)<br>เลือก 1:1 ระบบจะตัดราคาและข้อความรายละเอียดออกอัตโนมัติ เหลือแค่โลโก้ สินค้า และหัวข้อ';
+    }
+  }
+
   document.querySelectorAll('.toggle-btn[data-format]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.toggle-btn[data-format]').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      state.outputFormat = btn.dataset.format;
+      const fmt = btn.dataset.format;
+      if(state.mode === 'multi'){
+        if(fmt === 'square') return; // 1:1 is only for the single-menu template
+        state.multi.outputFormat = fmt;
+      } else {
+        state.outputFormat = fmt;
+      }
+      syncSizeUI();
       syncFormatDependentControls();
       render();
     });
   });
+  syncSizeUI();
 
   const logoToggle = document.getElementById('logoToggle');
   const logoDrop = document.getElementById('logoDrop');
@@ -2020,8 +2091,7 @@ const ASSETS = {
     logoChip.style.display='none'; logoInput.value=''; logoToggle.checked=false; logoDrop.style.display='none'; storeLogoAdjust.style.display='none';
     document.querySelectorAll('.toggle-btn[data-product]').forEach(b=>b.classList.remove('active'));
     document.querySelector('.toggle-btn[data-product="mug"]').classList.add('active');
-    document.querySelectorAll('.toggle-btn[data-format]').forEach(b=>b.classList.remove('active'));
-    document.querySelector('.toggle-btn[data-format="a3"]').classList.add('active');
+    syncSizeUI();
     // reset slider UI elements + their value labels back to defaults
     const sliderDefaults = [
       ['foodZoom','foodZoomVal',100,v=>v+'%'], ['foodOffsetX','foodOffsetXVal',0,v=>v], ['foodOffsetY','foodOffsetYVal',0,v=>v],
